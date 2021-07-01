@@ -1,1 +1,1 @@
-* @Valeryibarra @renardete @leonleo997 @holgiosalos
+* @germandavid85 @aperdomob @holgiosalos @danielgalvis98 @veronicatofino
