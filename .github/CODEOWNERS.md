@@ -1,1 +1,1 @@
-* @aperdomob @germandavid85 @luigisamurai @yesidbalvin @Scot3004 @santirogu
+* @Valeryibarra @renardete @leonleo997 @holgiosalos
