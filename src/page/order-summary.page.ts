@@ -1,13 +1,13 @@
 import { $, ElementFinder } from 'protractor';
 
 export class OrderSummaryPage {
-  private orderSuccessfulConfirm: ElementFinder;
+  private orderSummaryTitle: ElementFinder;
 
   constructor () {
-    this.orderSuccessfulConfirm = $('#center_column > div > p > strong');
+    this.orderSummaryTitle = $('#center_column > div > p > strong');
   }
 
-  public async getOrderSuccessfulConfirm(): Promise<string> {
-    return await this.orderSuccessfulConfirm.getText();
+  public async getOrderSummaryTitle(): Promise<string> {
+    return await this.orderSummaryTitle.getText();
   }
 }

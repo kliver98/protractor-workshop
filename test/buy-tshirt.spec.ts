@@ -35,28 +35,28 @@ describe('Buy a t-shirt', () => {
     await(browser.sleep(3000));
     await productListPage.selectAddToCart();
     await(browser.sleep(3000));
-    await productAddedModalPage.goToProceedToCheckout();
+    await productAddedModalPage.goToOrderSummaryStep();
     await(browser.sleep(3000));
-    await summaryStepPage.goToProceedToCheckout();
+    await summaryStepPage.goToSignInStep();
     await(browser.sleep(3000));
 
     await signInStepPage.login('aperdomobo@gmail.com','WorkshopProtractor');
     await(browser.sleep(3000));
 
-    await addressStepPage.goToProceedToCheckout();
+    await addressStepPage.goToShippingStep();
     await(browser.sleep(3000));
 
     await shippingStepPage.acceptTermsOfService();
     await(browser.sleep(3000));
 
-    await shippingStepPage.goToProceedToCheckout();
+    await shippingStepPage.goToPaymentStep();
     await(browser.sleep(3000));
-    await bankPaymentPage.selectPayByBackWire();
+    await paymentStepPage.goToPayByBackWire();
     await(browser.sleep(3000));
-    await paymentStepPage.goToConfirmOrder();
+    await bankPaymentPage.confirm();
     await(browser.sleep(3000));
 
-    await expect(orderSummaryPage.getOrderSuccessfulConfirm())
+    await expect(orderSummaryPage.getOrderSummaryTitle())
       .toBe('Your order on My Store is complete.');
   });
 });

@@ -13,7 +13,7 @@ export class ShippingStepPage {
     await this.termsOfService.click();
   }
 
-  public async goToProceedToCheckout(): Promise<void> {
+  public async goToPaymentStep(): Promise<void> {
     await this.proceedToCheckout.click();
   }
 }
