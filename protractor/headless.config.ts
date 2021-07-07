@@ -1,5 +1,5 @@
 import { reporter } from './helpers/reporter';
-import { Config } from 'protractor';
+import { Config, browser } from 'protractor';
 
 export const config: Config = {
   framework: 'jasmine',
@@ -17,5 +17,6 @@ export const config: Config = {
   },
   onPrepare: () => {
     reporter();
+    browser.manage().timeouts().implicitlyWait(3000);
   }
 };
