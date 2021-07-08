@@ -4,7 +4,7 @@ export class SummaryStepPage {
   private proceedToCheckout: ElementFinder;
 
   constructor () {
-    this.proceedToCheckout = $('.cart_navigation span');
+    this.proceedToCheckout = $('.cart_navigation .standard-checkout');
   }
 
   public async goToSignInStep(): Promise<void> {
