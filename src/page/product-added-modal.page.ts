@@ -1,4 +1,4 @@
-import { $, ElementFinder } from 'protractor';
+import { $, ElementFinder, browser, ExpectedConditions } from 'protractor';
 
 export class ProductAddedModalPage {
   private proceedToCheckout: ElementFinder;
@@ -8,6 +8,7 @@ export class ProductAddedModalPage {
   }
 
   public async goToOrderSummaryStep(): Promise<void> {
+    await browser.wait(ExpectedConditions.elementToBeClickable(this.proceedToCheckout));
     await this.proceedToCheckout.click();
   }
 }
