@@ -4,7 +4,7 @@ export class ProductListPage {
   private addToCart: ElementFinder;
 
   constructor () {
-    this.addToCart = $('ul.product_list > li:nth-child(1) .button-container .ajax_add_to_cart_button');
+    this.addToCart = $('.button-container [data-id-product="1"]');
   }
 
   public async selectAddToCart(): Promise<void> {

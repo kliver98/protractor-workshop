@@ -6,7 +6,7 @@ export class ShippingStepPage {
 
   constructor () {
     this.termsOfService = $('#cgv');
-    this.proceedToCheckout = $('form .cart_navigation > button[type="submit"]');
+    this.proceedToCheckout = $('[name="processCarrier"]');
   }
 
   public async acceptTermsOfService(): Promise<void> {
