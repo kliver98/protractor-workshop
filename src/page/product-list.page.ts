@@ -4,7 +4,7 @@ export class ProductListPage {
   private addToCart: ElementFinder;
 
   constructor () {
-    this.addToCart = $('.button-container [data-id-product="1"]');
+    this.addToCart = $('#center_column [title="Add to cart"]');
   }
 
   public async selectAddToCart(): Promise<void> {
