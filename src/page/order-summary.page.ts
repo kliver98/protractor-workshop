@@ -4,7 +4,7 @@ export class OrderSummaryPage {
   private orderSummaryTitle: ElementFinder;
 
   constructor () {
-    this.orderSummaryTitle = $('#center_column > div > p > strong');
+    this.orderSummaryTitle = $('.cheque-indent > strong');
   }
 
   public async getOrderSummaryTitle(): Promise<string> {
