@@ -13,36 +13,62 @@ import {
  } from '../src/page';
 
 describe('Buy a t-shirt', () => {
-  const menuContentPage: MenuContentPage = new MenuContentPage();
-  const signInStepPage: SignInStepPage = new SignInStepPage();
-  const addressStepPage: AddressStepPage = new AddressStepPage();
-  const summaryStepPage: SummaryStepPage = new SummaryStepPage();
-  const shippingStepPage: ShippingStepPage = new ShippingStepPage();
-  const paymentStepPage: PaymentStepPage = new PaymentStepPage();
-  const orderSummaryPage: OrderSummaryPage = new OrderSummaryPage();
-  const productAddedModalPage: ProductAddedModalPage = new ProductAddedModalPage();
-  const productListPage: ProductListPage = new ProductListPage();
-  const bankPaymentPage: BankPaymentPage = new BankPaymentPage();
 
-  it('then should be bought a t-shirt', async () => {
-    await browser.waitForAngularEnabled(false);
-    await browser.get('http://automationpractice.com/');
-    await menuContentPage.goToTShirtMenu();
-    await productListPage.selectAddToCart();
-    await productAddedModalPage.goToOrderSummaryStep();
-    await summaryStepPage.goToSignInStep();
+  describe('Open webpage', () => {
 
-    await signInStepPage.login('aperdomobo@gmail.com', 'WorkshopProtractor');
+    beforeAll(async () => {
+      await browser.waitForAngularEnabled(false);
+      await browser.get('http://automationpractice.com/');
+    });
 
-    await addressStepPage.goToShippingStep();
+    describe('Buy proccess', async () => {
+      beforeAll(async () => {
+        const menuContentPage: MenuContentPage = new MenuContentPage();
+        const productListPage: ProductListPage = new ProductListPage();
+        const productAddedModalPage: ProductAddedModalPage = new ProductAddedModalPage();
+        const summaryStepPage: SummaryStepPage = new SummaryStepPage();
 
-    await shippingStepPage.acceptTermsOfService();
+        await menuContentPage.goToTShirtMenu();
+        await productListPage.selectAddToCart();
+        await productAddedModalPage.goToOrderSummaryStep();
+        await summaryStepPage.goToSignInStep();
+      });
 
-    await shippingStepPage.goToPaymentStep();
-    await paymentStepPage.goToPayByBackWire();
-    await bankPaymentPage.confirm();
+      describe('Sign-In into application', async () => {
+        beforeAll(async () => {
+          const signInStepPage: SignInStepPage = new SignInStepPage();
 
-    await expect(orderSummaryPage.getOrderSummaryTitle())
-      .toBe('Your order on My Store is complete.');
+          await signInStepPage.login('aperdomobo@gmail.com', 'WorkshopProtractor');
+        });
+
+        describe('Selecting default address', async () => {
+          beforeAll(async () => {
+            const addressStepPage: AddressStepPage = new AddressStepPage();
+
+            await addressStepPage.goToShippingStep();
+          });
+
+          describe('Bank payment', async () => {
+            beforeAll(async () => {
+              const shippingStepPage: ShippingStepPage = new ShippingStepPage();
+              const paymentStepPage: PaymentStepPage = new PaymentStepPage();
+              const bankPaymentPage: BankPaymentPage = new BankPaymentPage();
+
+              await shippingStepPage.acceptTermsOfService();
+              await shippingStepPage.goToPaymentStep();
+              await paymentStepPage.goToPayByBackWire();
+              await bankPaymentPage.confirm();
+            });
+
+            it('then should be bought a t-shirt', async () => {
+              const orderSummaryPage: OrderSummaryPage = new OrderSummaryPage();
+
+              await expect(orderSummaryPage.getOrderSummaryTitle())
+              .toBe('Your order on My Store is complete.');
+            });
+          });
+        });
+      });
+    });
   });
 });
