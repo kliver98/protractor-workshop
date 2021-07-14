@@ -153,3 +153,7 @@ $RECYCLE.BIN/
 
 # Typescript
 dist
+
+# awesome reports folder
+reports
+awesome-report
