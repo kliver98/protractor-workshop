@@ -1,6 +1,6 @@
 import { browser } from 'protractor';
 import {
-  // MenuContentPage,
+  MenuContentPage,
   SignInStepPage,
   AddressStepPage,
   SummaryStepPage,
@@ -23,12 +23,12 @@ describe('Buy a t-shirt', () => {
 
     describe('Buy proccess', async () => {
       beforeAll(async () => {
-        // const menuContentPage: MenuContentPage = new MenuContentPage();
+        const menuContentPage: MenuContentPage = new MenuContentPage();
         const productListPage: ProductListPage = new ProductListPage();
         const productAddedModalPage: ProductAddedModalPage = new ProductAddedModalPage();
         const summaryStepPage: SummaryStepPage = new SummaryStepPage();
 
-        // await menuContentPage.goToTShirtMenu();
+        await menuContentPage.goToTShirtMenu();
         await productListPage.selectAddToCart();
         await productAddedModalPage.goToOrderSummaryStep();
         await summaryStepPage.goToSignInStep();
