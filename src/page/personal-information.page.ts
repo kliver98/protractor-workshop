@@ -1,4 +1,4 @@
-import { browser, $, $$, ElementFinder, ElementArrayFinder, by, ExpectedConditions } from 'protractor';
+import { $, browser, ElementFinder, ElementArrayFinder, by, ExpectedConditions, element } from 'protractor';
 
 export class PersonalInformationPage {
   private firstNameInput: ElementFinder;
@@ -10,13 +10,13 @@ export class PersonalInformationPage {
   private submitButton: ElementFinder;
 
   constructor() {
-    this.firstNameInput = $('[name="firstname"]');
-    this.lastNameInput = $('[name="lastname"]');
-    this.sexInput = $$('[name="sex"]');
-    this.experienceInput = $$('[name="exp"]');
-    this.continentSelector = $('[name="continents"]');
-    this.commandsSelector = $('[name="selenium_commands"]');
-    this.submitButton = $('[name="submit"]');
+    this.firstNameInput = element(by.name('firstname'));
+    this.lastNameInput = element(by.name('lastname'));
+    this.sexInput = element.all(by.name('sex'));
+    this.experienceInput = element.all(by.name('exp'));
+    this.continentSelector = element(by.name('continents'));
+    this.commandsSelector = element(by.name('selenium_commands'));
+    this.submitButton = element(by.name('submit'));
   }
 
   private async fillFullName(firstName: string, lastName: string): Promise<void> {
@@ -71,7 +71,7 @@ export class PersonalInformationPage {
   }
 
   public async getTitle(): Promise<string> {
-    return $$('h1').first().getText();
+    return element.all(by.css('h1')).first().getText();
   }
 
   public async fillForm(data: {firstName: string, lastName: string, sex: string, experience: number,
