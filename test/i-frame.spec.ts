@@ -1,13 +1,13 @@
 import { browser } from 'protractor';
 import { IFramePage } from '../src/page';
 
-describe('Given a practice IFrame page', () => {
+describe('Given an IFrame page', () => {
   beforeAll(async () => {
     browser.waitForAngularEnabled(false);
     await browser.get('https://demoqa.com/frames');
   });
 
-  describe('When the height of IFrame wants to be modify', () => {
+  describe('When the height is modified', () => {
     const iFramePage: IFramePage = new IFramePage();
     const height = 500;
 
