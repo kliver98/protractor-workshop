@@ -11,3 +11,4 @@ export { ProductListPage } from './product-list.page';
 export { PersonalInformationPage } from './personal-information.page';
 export { IFramePage } from './i-frame.page';
 export { MainContentPage } from './main-content.page';
+export { DownloadFilePage } from './download-file.page';
