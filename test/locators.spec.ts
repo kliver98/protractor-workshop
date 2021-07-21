@@ -7,7 +7,7 @@ describe('Given an Automation Practice Form', () => {
     await browser.get('https://www.tutorialspoint.com/selenium/selenium_automation_practice.htm');
   });
 
-  describe('when fill the form', () => {
+  describe('When fill the form', () => {
     const personalInformationPage: PersonalInformationPage = new PersonalInformationPage();
 
     beforeAll(async () => {
@@ -17,6 +17,7 @@ describe('Given an Automation Practice Form', () => {
         sex: 'Male',
         experience: 7,
         profession: ['Automation Tester'],
+        profilePictureRelativePath: 'resources/sample_img.jpg',
         tools: ['Selenium Webdriver'],
         continent: 'South America',
         commands: [
@@ -28,6 +29,11 @@ describe('Given an Automation Practice Form', () => {
       });
 
       await personalInformationPage.submitForm();
+    });
+
+    it('Then should upload picture', async () => {
+      const imgName = 'sample_img.jpg';
+      expect(await personalInformationPage.getPhotoTitle()).toContain(imgName);
     });
 
     it('Then should have a title', async () => {
