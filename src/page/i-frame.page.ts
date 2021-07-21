@@ -1,16 +1,17 @@
 import { $, browser, ElementFinder } from 'protractor';
 
 export class IFramePage {
-  private iFrame1: ElementFinder;
+  private pageTitle: ElementFinder;
 
   constructor() {
-    this.iFrame1 = $('#frame1');
+    this.pageTitle = $('#sampleHeading');
   }
 
-  public async setFormFrameHeight(height: number): Promise<void> {
-    return browser.executeScript(`arguments[0].height = ${height};`, this.iFrame1);
+  public async getPageTitle(): Promise<string> {
+    return await this.pageTitle.getText();
   }
-  public async getIFrameHeight(): Promise<number> {
-    return (await this.iFrame1.getSize()).height;
+
+  public async switchToMainPage(): Promise<void> {
+    await browser.switchTo().defaultContent();
   }
 }
