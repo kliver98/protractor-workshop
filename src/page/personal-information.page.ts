@@ -1,10 +1,13 @@
 import { $, browser, ElementFinder, ElementArrayFinder, by, ExpectedConditions, element } from 'protractor';
+const path = require('path');
+const fs = require('fs');
 
 export class PersonalInformationPage {
   private firstNameInput: ElementFinder;
   private lastNameInput: ElementFinder;
   private sexInput: ElementArrayFinder;
   private experienceInput: ElementArrayFinder;
+  private photoInput: ElementFinder;
   private continentSelector: ElementFinder;
   private commandsSelector: ElementFinder;
   private submitButton: ElementFinder;
@@ -17,6 +20,7 @@ export class PersonalInformationPage {
     this.continentSelector = element(by.name('continents'));
     this.commandsSelector = element(by.name('selenium_commands'));
     this.submitButton = element(by.name('submit'));
+    this.photoInput = element(by.name('photo'));
   }
 
   private async fillFullName(firstName: string, lastName: string): Promise<void> {
@@ -48,6 +52,17 @@ export class PersonalInformationPage {
     });
   }
 
+  private async uploadProfilePicture(profilePictureRelativePath: string): Promise<void> {
+    const fullPath = path.join(process.cwd(), profilePictureRelativePath);
+    try {
+      if (fs.existsSync(fullPath)) {
+        await this.photoInput.sendKeys(fullPath);
+      }
+    } catch (error) {
+
+    }
+  }
+
   private async fillTools(tools: string[]): Promise<void> {
     tools.forEach(async (toolValue) => {
       await $(`[name="tool"][value="${toolValue}"]`).click();
@@ -71,15 +86,21 @@ export class PersonalInformationPage {
   }
 
   public async getTitle(): Promise<string> {
-    return element.all(by.css('h1')).first().getText();
+    return await element.all(by.css('h1')).first().getText();
   }
 
-  public async fillForm(data: {firstName: string, lastName: string, sex: string, experience: number,
-    profession: string[], tools: string[], continent: string, commands: string[]}): Promise<void> {
+  public async getPhotoTitle(): Promise<string> {
+    return await this.photoInput.getAttribute('value');
+  }
+
+  public async fillForm(data: {firstName: string, lastName: string, sex: string,
+    experience: number, profession: string[], profilePictureRelativePath: string, tools: string[],
+    continent: string, commands: string[]}): Promise<void> {
     await this.fillFullName(data.firstName, data.lastName);
     await this.fillSex(data.sex);
     await this.fillExperience(data.experience);
     await this.fillProfession(data.profession);
+    await this.uploadProfilePicture(data.profilePictureRelativePath);
     await this.fillTools(data.tools);
     await this.fillContinent(data.continent);
     await this.fillCommands(data.commands);
