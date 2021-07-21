@@ -157,3 +157,6 @@ dist
 # awesome reports folder
 reports
 awesome-report
+
+# folders generated when run tests
+temp
