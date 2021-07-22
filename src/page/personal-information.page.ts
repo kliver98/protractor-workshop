@@ -1,6 +1,5 @@
 import { $, browser, ElementFinder, ElementArrayFinder, by, ExpectedConditions, element } from 'protractor';
-const path = require('path');
-const fs = require('fs');
+const { resolve } = require('path');
 
 export class PersonalInformationPage {
   private firstNameInput: ElementFinder;
@@ -53,14 +52,7 @@ export class PersonalInformationPage {
   }
 
   private async uploadProfilePicture(profilePictureRelativePath: string): Promise<void> {
-    const fullPath = path.join(process.cwd(), profilePictureRelativePath);
-    try {
-      if (fs.existsSync(fullPath)) {
-        await this.photoInput.sendKeys(fullPath);
-      }
-    } catch (error) {
-
-    }
+    await this.photoInput.sendKeys(resolve(profilePictureRelativePath));
   }
 
   private async fillTools(tools: string[]): Promise<void> {
