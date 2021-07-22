@@ -6,7 +6,8 @@
   "scripts": {
     "clean": "rm -rf dist reports",
     "build": "npm run lint && npm run clean && tsc",
-    "test": "npm run test:headless",
+    "test:saucelabs": "npm run build && protractor dist/protractor/saucelabs.config.js",
+    "test": "npm run test:saucelabs",
     "test:local": "npm run build && protractor dist/protractor/local.config.js",
     "test:headless": "npm run build && protractor dist/protractor/headless.config.js",
     "webdriver:update": "webdriver-manager update --gecko false",
@@ -35,6 +36,7 @@
     "jasmine-awesome-report": "^0.1.0",
     "jasmine-spec-reporter": "^7.0.0",
     "protractor": "^7.0.0",
+    "selenium-webdriver": "^3.6.0",
     "tslint": "^6.1.3",
     "tslint-config-airbnb": "^5.11.2",
     "typescript": "^3.9.10"
