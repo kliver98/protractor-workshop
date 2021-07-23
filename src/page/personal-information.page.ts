@@ -1,6 +1,8 @@
 import { $, browser, ElementFinder, ElementArrayFinder, by, ExpectedConditions, element } from 'protractor';
-const path = require('path');
-const fs = require('fs');
+import * as remote from 'selenium-webdriver/remote';
+import { existsSync } from 'fs';
+
+const { resolve } = require('path');
 
 export class PersonalInformationPage {
   private firstNameInput: ElementFinder;
@@ -53,13 +55,11 @@ export class PersonalInformationPage {
   }
 
   private async uploadProfilePicture(profilePictureRelativePath: string): Promise<void> {
-    const fullPath = path.join(process.cwd(), profilePictureRelativePath);
-    try {
-      if (fs.existsSync(fullPath)) {
-        await this.photoInput.sendKeys(fullPath);
-      }
-    } catch (error) {
-
+    const path = resolve(profilePictureRelativePath);
+    if (existsSync(path)) {
+      await browser.setFileDetector(new remote.FileDetector);
+      await this.photoInput.sendKeys(path);
+      await browser.setFileDetector(undefined);
     }
   }
 
